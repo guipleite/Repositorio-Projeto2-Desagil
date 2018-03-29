@@ -9,12 +9,12 @@ public class NotGate extends Gate {
 
 	@Override
 	public void connect(int pinIndex, Emitter emitter) {
-		nandgate.connect(0, emitter);
+		nandgate.connect(0, emitter);//Conecta as duas entradas do nand em um emmiter
 		nandgate.connect(1, emitter);
 	}
 
 	@Override
 	public boolean read() {
-		return nandgate.read();
+		return nandgate.read(); // retorna a saida do nand
 	}
 }
