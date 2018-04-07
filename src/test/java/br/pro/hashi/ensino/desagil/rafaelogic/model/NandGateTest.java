@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.pro.hashi.ensino.desagil.rafaelogic.model.NandGate;
+import br.pro.hashi.ensino.desagil.rafaelogic.logic.model.NandGate;
 
 public class NandGateTest {
 	private NandGate gate;

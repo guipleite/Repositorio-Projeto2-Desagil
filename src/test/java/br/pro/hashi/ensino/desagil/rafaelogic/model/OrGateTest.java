@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.pro.hashi.ensino.desagil.rafaelogic.model.OrGate;
+import br.pro.hashi.ensino.desagil.rafaelogic.logic.model.OrGate;
 
 public class OrGateTest {
 	private OrGate gate;

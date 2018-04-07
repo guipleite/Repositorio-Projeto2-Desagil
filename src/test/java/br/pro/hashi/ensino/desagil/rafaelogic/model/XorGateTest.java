@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.pro.hashi.ensino.desagil.rafaelogic.model.XorGate;
+import br.pro.hashi.ensino.desagil.rafaelogic.logic.model.XorGate;
 
 public class XorGateTest {
 	private XorGate gate;
