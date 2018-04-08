@@ -4,10 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-
 import br.pro.hashi.ensino.desagil.rafaelogic.logic.model.Gate;
 
 
@@ -16,56 +15,51 @@ public class GateView extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private Gate gate;
 
-	private	JTextField weightField;
-	private	JTextField radiusField;
-	private JTextField resultField;
+	private	JCheckBox c1;
+	private	JCheckBox c2;
+	private JCheckBox c3;
 
 
 	public GateView(Gate gate){
 		this.gate = gate;
 
-		weightField = new JTextField();
-		radiusField = new JTextField();
-		resultField = new JTextField();
+		c1 = new JCheckBox();
+		c2 = new JCheckBox();
+		c3 = new JCheckBox();
 
-		JLabel weightLabel = new JLabel("Weight");
-		JLabel radiusLabel = new JLabel("Radius");
-		JLabel resultLabel = new JLabel("Result");
+		JLabel inLabel = new JLabel("Entrada: ");
+		JLabel outLabel = new JLabel("Saída: ");
 
-		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
-		add(weightLabel);
-		add(weightField);
-		add(radiusLabel);
-		add(radiusField);
-		add(resultLabel);
-		add(resultField);
+		add(inLabel);
+		add(c1);
+		add(inLabel);
+		add(c2);
+		add(outLabel);
+		add(c3);
 
-		weightField.addActionListener(this);
-		radiusField.addActionListener(this);
-
-		resultField.setEnabled(false);
+		c1.addActionListener(this);
+		c2.addActionListener(this);
+		c3.setEnabled(false);
 
 		update();
 	}
 
 
 	private void update() {
-		double weight;
-		double radius;
-
+		
 		try {
-			weight = Double.parseDouble(weightField.getText());
-			radius = Double.parseDouble(radiusField.getText());
+			
 		}
 		catch(NumberFormatException exception) {
-			resultField.setText("?");
+			c3.setText("?");
 			return;
 		}
 
 		//double result = gate.calculate(weight, radius);
-		double result = 1;
-		resultField.setText(Double.toString(result));
+		//double result = 1;
+		//resultField.setText(Double.toString(result));
 	}
 
 	@Override
