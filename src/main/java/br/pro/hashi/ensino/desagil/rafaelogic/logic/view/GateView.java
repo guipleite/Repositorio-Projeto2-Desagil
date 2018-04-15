@@ -34,7 +34,7 @@ public class GateView extends SimplePanel implements ActionListener, MouseListen
 	
 	///Codigo para determinado portao definido pelo usuario
 	public GateView(Gate gate) {
-		super(245, 300);
+		super(300, 200);
 		
 		this.gate = gate;
 		
@@ -51,13 +51,10 @@ public class GateView extends SimplePanel implements ActionListener, MouseListen
 		//setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); /// Layout do painel
 	
 		if (this.gate.getSize() == 1){  /// Determina o numero de entradas dependendo da selacao de portas do usuario
-			//add(entrada1);
-			add(entrada1, 10, 10, 75, 25);
+			add(entrada1, 20, 107, 75, 25);
 		} else if (this.gate.getSize() == 2) {
-			//add(entrada1);
-			//add(entrada2);
-			add(entrada1, 10, 10, 75, 25);
-			add(entrada2, 20, 10, 75, 25);
+			add(entrada1, 20, 123, 75, 25);
+			add(entrada2, 20, 84, 75, 25);
 
 		}
 	
@@ -111,7 +108,7 @@ public class GateView extends SimplePanel implements ActionListener, MouseListen
 		int y = event.getY();
 
 		// Se o clique foi dentro do retângulo colorido...
-		if(x >= 195 && x < 235 && y >= 80 && y < 255) {
+		if(x >= 195 && x < 235 && y >= 80 && y < 120 ) {
 
 			// ...então abrimos o seletor de cor...
 			color = JColorChooser.showDialog(this, null, color);
@@ -154,11 +151,12 @@ public class GateView extends SimplePanel implements ActionListener, MouseListen
 
 		// Desenha a imagem passando posição e tamanho.
 		// O último parâmetro pode ser sempre null.
-		g.drawImage(image, 10, 80, 175, 175, null);
+		g.drawImage(image, 95, 80, 150, 80 ,null);
 
 		// Desenha um retângulo cheio.
 		g.setColor(color);
-		g.fillRect(195, 80, 40, 175);
+		//g.fillRect(195, 80, 40, 175);
+		g.fillArc(240,97, 40, 40, 0, 360);
 
 		// Evita bugs visuais em alguns sistemas operacionais.
 		getToolkit().sync();
