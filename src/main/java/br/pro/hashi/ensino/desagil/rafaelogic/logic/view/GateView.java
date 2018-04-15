@@ -2,11 +2,9 @@ package br.pro.hashi.ensino.desagil.rafaelogic.logic.view;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.BoxLayout;
 import br.pro.hashi.ensino.desagil.rafaelogic.logic.model.Source;
 import br.pro.hashi.ensino.desagil.rafaelogic.logic.model.Gate;
 import javax.swing.JCheckBox;
-import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -15,7 +13,6 @@ import java.awt.event.MouseListener;
 import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JColorChooser;
-import javax.swing.JLabel;
 
 
 public class GateView extends SimplePanel implements ActionListener, MouseListener {
@@ -27,7 +24,6 @@ public class GateView extends SimplePanel implements ActionListener, MouseListen
 	///Classe JCheckBox representa a CheckBox para as entradas das portas logicas
 	private JCheckBox entrada1;
 	private JCheckBox entrada2;
-	private JCheckBox saida;
 	private Color color;
 	private Image image;
 	
@@ -45,28 +41,20 @@ public class GateView extends SimplePanel implements ActionListener, MouseListen
 		entrada2 = new JCheckBox();
 	    entrada2.setSelected(false);
 	    
-		saida = new JCheckBox();
-	    saida.setSelected(false);
-	    
-	    
-		//setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); /// Layout do painel
-	
+	    //Posisão dos Checkbox
 		if (this.gate.getSize() == 1){  /// Determina o numero de entradas dependendo da selacao de portas do usuario
 			add(entrada1, 20, 107, 75, 25);
 		} else if (this.gate.getSize() == 2) {
 			add(entrada1, 20, 123, 75, 25);
 			add(entrada2, 20, 84, 75, 25);
-
 		}
 	
-		add(saida);
 		///Painel reage ao usuario 
 		entrada1.addActionListener(this);
 		entrada2.addActionListener(this);
-		saida.setEnabled(false);
 		
 		color = Color.BLACK;
-
+		//Define a imagem que ira ser chamada
 		String path = "/" + gate.toString() + ".png";
 		URL url = getClass().getResource(path);
 		image = new ImageIcon(url).getImage();
@@ -136,12 +124,11 @@ public class GateView extends SimplePanel implements ActionListener, MouseListen
 
 		super.paintComponent(g);
 		
-		g.drawImage(image, 95, 80, 150, 80 ,null);
+		g.drawImage(image, 95, 80, 150, 80 ,null);//Cordenadas da Imagem
 
 		g.setColor(color);
-		g.fillArc(240,97, 40, 40, 0, 360);
+		g.fillArc(240,97, 40, 40, 0, 360);//Cordenadas do LED
 
-		// Evita bugs visuais em alguns sistemas operacionais.
 		getToolkit().sync();
 
     }
