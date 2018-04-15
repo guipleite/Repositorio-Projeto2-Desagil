@@ -26,6 +26,8 @@ public class GateView extends SimplePanel implements ActionListener, MouseListen
 	private JCheckBox entrada2;
 	private Color color;
 	private Image image;
+	private boolean on;
+
 	
 	
 	///Codigo para determinado portao definido pelo usuario
@@ -78,10 +80,13 @@ public class GateView extends SimplePanel implements ActionListener, MouseListen
 		
 		if(gate.read() == true) {
 			color = Color.RED;
+			on = true;
+
 			repaint();
 		}
 		else {
 			color = Color.BLACK;
+			on = false;
 			repaint();
 		}
 	}
@@ -97,12 +102,10 @@ public class GateView extends SimplePanel implements ActionListener, MouseListen
 		int x = event.getX();
 		int y = event.getY();
 
-		//boolean isIn =  (x - 40) * (x - 40) + (y - 40) * (y - 40) <= 20 * 20;System.out.println(isIn);
-		// Se o clique foi dentro do retângulo colorido...
-		if(x >= 195 && x < 235 && y >= 80 && y < 120 ) {
+		double isIn = Math.sqrt(Math.pow(260-x, 2)+Math.pow(117-y, 2));
 
+		if(isIn <= 20 && on == true) {
 			color = JColorChooser.showDialog(this, null, color);
-
 			repaint();
 		}
 	}
