@@ -39,15 +39,16 @@ public class GateView extends SimplePanel implements ActionListener, MouseListen
 		this.gate = gate;
 		
 		
-		entrada1 = new JCheckBox("Entrada 1"); /// inicializa as CheckBox e seleciona elas como false
+		entrada1 = new JCheckBox(); /// inicializa as CheckBox e seleciona elas como false
 	    entrada1.setSelected(false);
 	    
-		entrada2 = new JCheckBox("Entrada 2");
+		entrada2 = new JCheckBox();
 	    entrada2.setSelected(false);
 	    
-		saida = new JCheckBox("Saida");
+		saida = new JCheckBox();
 	    saida.setSelected(false);
-	
+	    
+	    
 		//setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); /// Layout do painel
 	
 		if (this.gate.getSize() == 1){  /// Determina o numero de entradas dependendo da selacao de portas do usuario
@@ -64,19 +65,14 @@ public class GateView extends SimplePanel implements ActionListener, MouseListen
 		entrada2.addActionListener(this);
 		saida.setEnabled(false);
 		
-		update();
-		
-		color = Color.RED;
+		color = Color.BLACK;
 
 		String path = "/" + gate.toString() + ".png";
 		URL url = getClass().getResource(path);
 		image = new ImageIcon(url).getImage();
 
-		// Toda componente Swing possui este método, que
-		// permite adicionar objetos que reagem a eventos
-		// de mouse que acontecem nela. Ou seja, ao passar
-		// this como parâmetro, estamos pedindo para a
-		// componente reagir aos próprios eventos de mouse.
+		update();
+		
 		addMouseListener(this);
 	
 	}
@@ -90,76 +86,64 @@ public class GateView extends SimplePanel implements ActionListener, MouseListen
 		gate.connect(1, pin2); ///conectando as entradas de acordo com a selecao do usuario
 		gate.connect(0, pin1);
 		
-		saida.setSelected(gate.read()); ///a checkbox saida se comporta como o metodo read da classe gate
-	
+	//a LED saida se comporta como o metodo read da classe gate e muda de cor dependendo da booleana
+		
+		if(gate.read() == true) {
+			color = Color.RED;
+			repaint();
+		}
+		else {
+			color = Color.BLACK;
+			repaint();
+		}
 	}
 				
 	@Override
 	public void actionPerformed(ActionEvent e) {
 			update();
-		
 	}
 	
 	@Override
 	public void mouseClicked(MouseEvent event) {
 
-		// Descobre em qual posição o clique ocorreu.
 		int x = event.getX();
 		int y = event.getY();
 
+		//boolean isIn =  (x - 40) * (x - 40) + (y - 40) * (y - 40) <= 20 * 20;System.out.println(isIn);
 		// Se o clique foi dentro do retângulo colorido...
 		if(x >= 195 && x < 235 && y >= 80 && y < 120 ) {
 
-			// ...então abrimos o seletor de cor...
 			color = JColorChooser.showDialog(this, null, color);
 
-			// ...e atualizamos a tela.
 			repaint();
 		}
 	}
 	@Override
 	public void mousePressed(MouseEvent event) {
-		// Não estamos interessados em reagir ao ato
-		// de apenas pressionar. Deixamos este vazio.
 	}
 	@Override
 	public void mouseReleased(MouseEvent event) {
-		// Não estamos interessados em reagir ao ato
-		// de apenas soltar. Deixamos este vazio.
 	}
 	@Override
 	public void mouseEntered(MouseEvent event) {
-		// Não estamos interessados em reagir ao ato
-		// do cursor entrar. Deixamos este vazio.
 	}
 	@Override
 	public void mouseExited(MouseEvent event) {
-		// Não estamos interessados em reagir ao ato
-		// do cursor sair. Deixamos este vazio.
 	}
 
-
-	// Usamos isso no Projeto 1, vocês lembram?
 	@Override
 	public void paintComponent(Graphics g) {
 
-		// Não podemos esquecer desta linha, pois não somos os
-		// únicos responsáveis por desenhar o painel, como era
-		// o caso no Projeto 1. Agora é preciso desenhar também
-		// componentes internas, e isso é feito pela superclasse.
 		super.paintComponent(g);
-
-		// Desenha a imagem passando posição e tamanho.
-		// O último parâmetro pode ser sempre null.
+		
 		g.drawImage(image, 95, 80, 150, 80 ,null);
 
-		// Desenha um retângulo cheio.
 		g.setColor(color);
-		//g.fillRect(195, 80, 40, 175);
 		g.fillArc(240,97, 40, 40, 0, 360);
 
 		// Evita bugs visuais em alguns sistemas operacionais.
 		getToolkit().sync();
+
     }
 }
 
