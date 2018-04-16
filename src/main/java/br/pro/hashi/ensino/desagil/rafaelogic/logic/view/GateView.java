@@ -45,10 +45,10 @@ public class GateView extends SimplePanel implements ActionListener, MouseListen
 	    
 	    //Posisão dos Checkbox
 		if (this.gate.getSize() == 1){  /// Determina o numero de entradas dependendo da selacao de portas do usuario
-			add(entrada1, 20, 107, 75, 25);
+			add(entrada1, 70, 107, 25, 25);
 		} else if (this.gate.getSize() == 2) {
-			add(entrada1, 20, 123, 75, 25);
-			add(entrada2, 20, 84, 75, 25);
+			add(entrada1, 70, 125, 25, 25);
+			add(entrada2, 70, 87, 25, 25);
 		}
 	
 		///Painel reage ao usuario 
@@ -77,11 +77,9 @@ public class GateView extends SimplePanel implements ActionListener, MouseListen
 		gate.connect(0, pin1);
 		
 	//a LED saida se comporta como o metodo read da classe gate e muda de cor dependendo da booleana
-		
 		if(gate.read() == true) {
 			color = Color.RED;
 			on = true;
-
 			repaint();
 		}
 		else {
@@ -103,7 +101,7 @@ public class GateView extends SimplePanel implements ActionListener, MouseListen
 		int y = event.getY();
 
 		double isIn = Math.sqrt(Math.pow(260-x, 2)+Math.pow(117-y, 2));
-
+		System.out.println(on);
 		if(isIn <= 20 && on == true) {
 			color = JColorChooser.showDialog(this, null, color);
 			repaint();
